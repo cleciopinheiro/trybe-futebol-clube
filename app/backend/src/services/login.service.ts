@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcryptjs';
 import UserModel from '../database/models/user.model';
-import LoginResponse from '../interfaces/LoginResponse';
+import LoginResponse from '../interfaces/IResponse';
 import JWT from '../utils/JWT';
 
 export default class LoginService {
