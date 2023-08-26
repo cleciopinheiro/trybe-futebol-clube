@@ -12,4 +12,16 @@ export default class MatchesService {
 
     return matches;
   }
+
+  static async getProgress() {
+    const matches = await this.getAll();
+    const mathcesInProgress = matches.filter((match) => match.inProgress === true);
+    return mathcesInProgress;
+  }
+
+  static async getFinished() {
+    const matches = await this.getAll();
+    const matchesFinished = matches.filter((match) => match.inProgress === false);
+    return matchesFinished;
+  }
 }
