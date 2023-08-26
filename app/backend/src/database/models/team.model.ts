@@ -8,7 +8,16 @@ export default class Team extends Model {
 
 Team.init(
   {
-    teamName: DataTypes.STRING,
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    teamName: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize: db,
