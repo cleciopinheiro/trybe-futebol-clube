@@ -24,4 +24,8 @@ export default class MatchesService {
     const matchesFinished = matches.filter((match) => match.inProgress === false);
     return matchesFinished;
   }
+
+  static async finish(id: number) {
+    await MatchModel.update({ inProgress: false }, { where: { id } });
+  }
 }
