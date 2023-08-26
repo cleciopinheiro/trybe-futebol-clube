@@ -25,8 +25,8 @@ export default class MatchesService {
     return matchesFinished;
   }
 
-  static async update(id: number, homeTeamGoals: number, awayTeamGoals: number) {
-    await MatchModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  static async update(id: number, data: object) {
+    await MatchModel.update(data, { where: { id } });
   }
 
   static async finish(id: number) {
