@@ -9,6 +9,7 @@ export default class MatchesService {
         { model: TeamModel, as: 'teamAway', attributes: { exclude: ['id'] } },
       ],
     });
+
     return matches;
   }
 }
