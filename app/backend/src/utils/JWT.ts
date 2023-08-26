@@ -11,7 +11,7 @@ export default class JWT {
     return jwt.sign(payload, secret);
   }
 
-  static verify(token: string): TokenPayload {
-    return jwt.verify(token, secret) as TokenPayload;
+  static verify(token: string) {
+    return jwt.verify(token, secret);
   }
 }

@@ -1,3 +1,3 @@
-export default interface IResponseLogin {
-  token?: string;
+export default interface IToken {
+  email: string;
 }
