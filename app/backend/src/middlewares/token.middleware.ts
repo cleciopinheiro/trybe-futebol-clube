@@ -12,6 +12,8 @@ export default function verifyToken(req: Request, res: Response, next: NextFunct
     const token = authorization.replace('Bearer ', '');
     const decoded = jwt.verify(token);
 
+    console.log(decoded);
+
     req.body.user = decoded;
   } catch (error) {
     return res.status(401).json({ message: 'Token must be a valid token' });

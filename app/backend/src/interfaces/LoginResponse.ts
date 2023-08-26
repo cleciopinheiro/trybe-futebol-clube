@@ -1,4 +1,4 @@
 export default interface IResponseLogin {
-  token?: string;
-  role?: string;
+  status: number;
+  data: { token: string } | { message: string } | { role: string };
 }

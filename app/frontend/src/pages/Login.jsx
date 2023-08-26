@@ -30,6 +30,7 @@ const Login = () => {
     } catch (error) {
       setFailedTryLogin(true);
       setIsLogged(false);
+      console.log(error);
     }
   };
 
