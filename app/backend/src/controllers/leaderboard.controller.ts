@@ -8,4 +8,10 @@ export default class LeaderboardController {
 
     return res.status(200).json(teams);
   }
+
+  static async getAway(req: Request, res: Response) {
+    const teams = await LeaderboardService.getAway();
+
+    return res.status(200).json(teams);
+  }
 }

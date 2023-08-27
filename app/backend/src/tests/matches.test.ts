@@ -35,17 +35,5 @@ describe('Teste a rota /matches', function () {
     expect(response.status).to.be.equal(200);
   });
 
-  // it('Teste se é possível atualizar uma partida', async function () {
-  //   sinon.stub(JWT, 'verify').returns({ email: 'admin@admin.com' });
-  //   sinon.stub(MatchesModel, 'update').resolves();
-  //   const response = await chai.request(app).patch('/matches/1').send({ homeTeamGoals: 1, awayTeamGoals: 0 });
-  //   expect(response.status).to.be.equal(200);
-  // });
-
-  // it('Teste se é possível atualizar uma partida como finalizada', async function () {
-  //   sinon.stub(MatchesModel, 'update').resolves();
-  //   const response = await chai.request(app)
-  //   .patch('/matches/1/finish').send({ homeTeamGoals: 1, awayTeamGoals: 0 });
-  //   expect(response.status).to.be.equal(200);
-  // });
+  
 });

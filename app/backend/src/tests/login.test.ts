@@ -29,6 +29,16 @@ describe('Teste a rota /login', function () {
     expect(response.body).to.be.an('object');
   });
 
+  // it('Teste se é possível logar com sucesso com a role correta', async function () {
+  //   sinon.stub(UserModel, 'findOne').resolves();
+  //   sinon.stub(jwt, 'verify').returns({ email: 'admin@admin.com'} as any);
+
+  //   const response = await chai.request(app)
+  //     .get('/login/role')
+
+  //   expect(response).to.have.status(200);
+  // })
+
   it('Teste se retorna um erro caso o usuário não preencha o campo email', async function () {
     sinon.stub(UserModel, 'findOne').resolves();
 
@@ -49,5 +59,29 @@ describe('Teste a rota /login', function () {
 
     expect(response).to.have.status(400);
     expect(response.body).to.be.an('object');
+  });
+
+  it('Teste se o usuário não informa email válido', async () => {
+    const response = await chai
+            .request(app)
+            .post('/login')
+            .send({
+              email: 'admin@teste.com',
+              password: 'secret_admin'
+            });
+
+    expect(response.status).to.be.equal(401);
+  });
+
+  it('Teste se o usuário não informa senha válida', async () => {
+    const response = await chai
+            .request(app)
+            .post('/login')
+            .send({
+              email: 'admin@teste.com',
+              password: 'password'
+            });
+
+    expect(response.status).to.be.equal(401);
   });
 });

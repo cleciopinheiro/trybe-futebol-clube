@@ -28,6 +28,13 @@ const resetTeams = () => {
 const addVicitoriesHome = (homeGoals: number, awayGoals: number) => {
   team.totalPoints += 3;
   team.totalVictories += 1;
+  team.goalsFavor += homeGoals;
+  team.goalsOwn += awayGoals;
+};
+
+const addVicitoriesAway = (homeGoals: number, awayGoals: number) => {
+  team.totalPoints += 3;
+  team.totalVictories += 1;
   team.goalsFavor += awayGoals;
   team.goalsOwn += homeGoals;
 };
@@ -39,10 +46,23 @@ const addDrawsHome = (homeGoals: number, awayGoals: number) => {
   team.goalsOwn += awayGoals;
 };
 
+const addDrawsAway = (homeGoals: number, awayGoals: number) => {
+  team.totalPoints += 1;
+  team.totalDraws += 1;
+  team.goalsFavor += awayGoals;
+  team.goalsOwn += homeGoals;
+};
+
 const addLossesHome = (homeGoals: number, awayGoals: number) => {
   team.totalLosses += 1;
   team.goalsFavor += homeGoals;
   team.goalsOwn += awayGoals;
+};
+
+const addLossesAway = (homeGoals: number, awayGoals: number) => {
+  team.totalLosses += 1;
+  team.goalsFavor += awayGoals;
+  team.goalsOwn += homeGoals;
 };
 
 const calculateEfficiency = (totalPoints: number, totalGames: number) => {
@@ -58,6 +78,14 @@ const totalPointsHome = (matches: IMatch[]) => {
   });
 };
 
+const totalPointsAway = (matches: IMatch[]) => {
+  matches.forEach(({ homeTeamGoals, awayTeamGoals }) => {
+    if (homeTeamGoals < awayTeamGoals) addVicitoriesAway(homeTeamGoals, awayTeamGoals);
+    if (homeTeamGoals === awayTeamGoals) addDrawsAway(homeTeamGoals, awayTeamGoals);
+    if (homeTeamGoals > awayTeamGoals) addLossesAway(homeTeamGoals, awayTeamGoals);
+  });
+};
+
 const calculateHomeStatistics = (name: string, matches: IMatch[]) => {
   if (name === team.name) resetTeams();
   team.name = name;
@@ -69,4 +97,15 @@ const calculateHomeStatistics = (name: string, matches: IMatch[]) => {
   return team;
 };
 
-export default calculateHomeStatistics;
+const calculateAwayStatistics = (name: string, matches: IMatch[]) => {
+  if (name === team.name) resetTeams();
+  team.name = name;
+  totalPointsAway(matches);
+  team.totalGames += 1;
+  team.goalsBalance = team.goalsFavor - team.goalsOwn;
+  const efficiency = calculateEfficiency(team.totalPoints, team.totalGames);
+  team.efficiency = Number(efficiency);
+  return team;
+};
+
+export { calculateHomeStatistics, calculateAwayStatistics };
