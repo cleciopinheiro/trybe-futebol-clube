@@ -1,7 +1,9 @@
 import TeamModel from '../database/models/team.model';
 import MatchModel from '../database/models/match.model';
-import { calculateHomeStatistics, calculateAwayStatistics } from '../utils/CalculateHomeStatistics';
+import { calculateHomeStatistics, calculateAwayStatistics } from '../utils/CalculateHomeAway';
 import orderClassification from '../utils/Classification';
+import calculateStatistics from '../utils/Calculate';
+// import ILeaderboard from '../interfaces/ILeaderboard';
 
 export default class LeaderboardService {
   static async getHome() {
@@ -44,5 +46,14 @@ export default class LeaderboardService {
     const teamsData = await Promise.all(TeamsAwayStatistics);
 
     return orderClassification(teamsData as unknown as []);
+  }
+
+  static async getAll() {
+    const home = await this.getHome();
+    const away = await this.getAway();
+
+    const teams = calculateStatistics(home, away);
+
+    return orderClassification(teams);
   }
 }

@@ -31,4 +31,13 @@ describe('Teste a rota /leaderboard', function () {
     expect(response).to.have.status(200);
     expect(response.body).to.be.an('array');
   });
+
+  it('Teste se é possível retornar as informações de desempenho de todos os times', async function () {
+    sinon.stub(MatchModel, 'findAll').resolves(LeaderMock as any);
+    const response = await chai.request(app)
+      .get('/leaderboard');
+
+    expect(response).to.have.status(200);
+    expect(response.body).to.be.an('array');
+  });
 });
