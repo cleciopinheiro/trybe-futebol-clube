@@ -87,7 +87,7 @@ const totalPointsAway = (matches: IMatch[]) => {
 };
 
 const calculateHomeStatistics = (name: string, matches: IMatch[]) => {
-  if (name === team.name) resetTeams();
+  if (name !== team.name) resetTeams();
   team.name = name;
   totalPointsHome(matches);
   team.totalGames += 1;
@@ -98,7 +98,7 @@ const calculateHomeStatistics = (name: string, matches: IMatch[]) => {
 };
 
 const calculateAwayStatistics = (name: string, matches: IMatch[]) => {
-  if (name === team.name) resetTeams();
+  if (name !== team.name) resetTeams();
   team.name = name;
   totalPointsAway(matches);
   team.totalGames += 1;
